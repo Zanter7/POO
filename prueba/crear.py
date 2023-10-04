@@ -14,4 +14,3 @@ try:
     print("se creo la tabla articulos") #confirmacion en terminal
 except sqlite3.OperationalError:
     print("La tabla articulos ya existe") #excepcion ante el error
-
