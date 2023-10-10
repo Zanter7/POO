@@ -11,7 +11,7 @@ def conexionDB():
 def CreaTablaProductos(DB):
     
     cursor = DB.cursor()
-    cursor.execute("CREATE TABLE productos(id integer PRIMARY KEY autoincrement, NombreProducto text, Peso real, FechaVencimineto text, PrecioCompra real, PrecioVenta real)")
+    cursor.execute("CREATE TABLE productos(id integer PRIMARY KEY autoincrement, NombreProducto text, Peso real, FechaVencimineto date, PrecioCompra real, PrecioVenta real)")
     DB.commit()
 
 def CreaTablaClientes(DB):
