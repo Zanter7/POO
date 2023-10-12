@@ -14,7 +14,7 @@ def CerrarConexDB(con): #Termina conexion con la DB
 def CrearTablaProductos(con):
     cursorOBJ = con.cursor()
 
-    crear = """ CREATE TABLE producto(
+    crear = """ CREATE TABLE IF NOT EXISTS producto(
     noIDProducto integer NOT NULL,
     nomProduct text NOT NULL,
     UnidadMedida float NOT NULL,
@@ -28,10 +28,28 @@ def CrearTablaProductos(con):
 
     con.commit()
 
+def CrearProducto(con):
+    cursorOBJ = con.cursor()
+
+    insertar = """ INSERT INTO producto VALUES(
+    1,
+    "Chocorramo",
+    80,
+    "2023-10-9",
+    1500.0,
+    4000.0
+    )
+    """
+
+    cursorOBJ.execute(insertar)
+
+    con.commit()
 
 def main():
     DataBase = conexionDB()
-    CrearTablaProductos(DataBase)
+    #CrearTablaProductos(DataBase)
+    CrearProducto(DataBase)
     CerrarConexDB(DataBase)
 
 main()
+print("qe")
