@@ -84,12 +84,78 @@ def actuProducNombre(con):
 
     con.commit()
 
+def ConsultarProd(con):
+    cursorOBJ = con.cursor()
+
+    IDproducto = input("ingrese identificador producto: ")
+    
+    consulta = f'SELECT noIDProducto, nomProduct FROM producto WHERE noIDProducto = {IDproducto} '
+
+    cursorOBJ.execute(consulta)
+
+    filas = cursorOBJ.fetchall()
+    
+    for row in filas:
+        idprod = row[0]
+        nmprod = row[1]
+
+        print("El numero de producto es : ", idprod)
+        print("El nombre de producto es ", nmprod)
+        #print(row)
+    
+
+def ConsultarProd2(con):
+    cursorOBJ = con.cursor()
+
+    IDproducto = input("ingrese identificador producto: ")
+    
+    consulta = f'SELECT COUNT(*) noIDProducto, nomProduct FROM producto WHERE noIDProducto = {IDproducto} '
+
+    cursorOBJ.execute(consulta)
+
+    filas = cursorOBJ.fetchall()
+    
+    for row in filas:
+        contador = row[0]    
+    
+    print(contador)
+
+def ConsultarProd3(con):
+    cursorOBJ = con.cursor()
+    
+    consulta = 'SELECT SUM(precioVenta) FROM producto'
+
+    cursorOBJ.execute(consulta)
+
+    filas = cursorOBJ.fetchall()
+    
+    print(filas)
+
+def  borrarProducto(con):
+    cursorOBJ = con.cursor()
+
+    IDProductoBorr = input("ingrese id producto a borrar: ")
+    
+    borrar = f'DELETE FROM producto WHERE noIDProducto ={IDProductoBorr}'
+
+    cursorOBJ.execute(borrar)
+    con.commit()
+
+def  borrarTablaProd(con):
+    cursorOBJ = con.cursor()
+
+    borrar = 'DROP TABLE producto'
+
+    cursorOBJ.execute(borrar)
+    con.commit()
+
 
 def main():
     DataBase = conexionDB()
     #CrearTablaProductos(DataBase)
     #CrearProducto3(DataBase)
-    actuProducNombre(DataBase)
+    #actuProducNombre(DataBase)
+    borrarTablaProd(DataBase)
     CerrarConexDB(DataBase)
     
 
